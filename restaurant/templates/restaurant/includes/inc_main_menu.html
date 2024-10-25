@@ -1,0 +1,96 @@
+{% load my_tags %}
+<div class="containerr-fluid">
+    <nav class="py-2 bg-body-tertiary border-bottom">
+
+
+        <div class="d-flex flex-wrap">
+            &nbsp;&nbsp;
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-blue text-decoration-none">
+
+                <span class="fs-4">Hungry Shark
+        {% if title %}
+        - {{title}}
+        {% endif %}</span>
+
+            </a>&nbsp;&nbsp;&nbsp;
+
+
+            <ul class="nav me-auto">
+
+
+                <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:main' %}">Главная</a>
+                &nbsp;
+                <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:about_us' %}">О ресторане</a>
+                &nbsp;
+                <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:booking_create' %}">Бронирование столика</a>
+                &nbsp;
+                <a class="p-2 btn btn-outline-primary" href="{%url 'restaurant:booking_list' %}">История бронирований</a>
+                &nbsp;
+                <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:question_list' %}">Вопросы и ответы</a>
+                &nbsp;
+
+                {% comment "Задел на будущее" %}
+                <a class="p-2 btn btn-outline-primary" href="#">Наш блог NA-UC</a>
+                &nbsp;
+                <a class="p-2 btn btn-outline-primary" href="#">Оставить отзыв NA-UC</a>
+                &nbsp;
+
+                {% endcomment %}
+
+            </ul>
+
+
+            <ul class="nav">
+                {% if user.is_authenticated %}
+
+                <img src="{{ user.avatar|user_media_filter }}" width="40" height="40"
+                     alt={{user.avatar|user_media_filter}}>
+                &nbsp;&nbsp;
+
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>
+                &nbsp;
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_detail' user.pk%}">Инфо</a>
+                &nbsp;
+
+                {% comment "Выход зависит о версии Django %}
+                <!--            Если Django старше 4 версии используем-->
+                <!--            <form method="post" action="{% url 'users:logout' %}">-->
+                <!--                {% csrf_token %}-->
+                <!--                <button class="p-2 btn btn-outline-primary" type="submit">Выйти</button>-->
+                <!--            </form>-->
+                <!--            Иначе используем-->
+                <!--            <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выйти</a>-->
+                {%endcomment%}
+
+
+                <form method="post" action="{% url 'users:logout' %}">
+                    {% csrf_token %}
+                    <button class="p-2 btn btn-outline-primary" type="submit">Выйти</button>
+                    &nbsp;&nbsp;
+                </form>
+
+
+
+
+                {% else %}
+                {% comment 'С грязным кешем на главную страницу не входить!' %}
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+                &nbsp;
+                {% endcomment %}
+
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_login' %}">Войти</a>
+                &nbsp;
+
+
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
+                &nbsp;&nbsp;
+                {% endif %}
+            </ul>
+        </div>
+
+
+    </nav>
+
+</div>
+
+
