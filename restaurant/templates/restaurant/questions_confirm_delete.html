@@ -1,0 +1,41 @@
+{% extends 'restaurant/base.html'%}
+{% block content %}
+
+
+<div class="row text-start">
+
+    <div class="col-lg-12 col-md-6 col-sm-12">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Удаление вопроса</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="card-text"> Вы действительно хотите удалить вопрос  <br> "{{object.question_text}}" -
+                     <br>Пользователя "{{object.sign}}" ?</div>
+                <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                    <div class="mb-3">
+
+                    {% csrf_token %}
+
+
+
+
+                    </div>
+
+
+                    <button type="submit" class="p-2 btn btn-outline-primary">
+                        Удалить
+                    </button>
+
+                    <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:question_list' %}">Отмена</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

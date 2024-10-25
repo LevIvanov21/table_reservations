@@ -1,0 +1,172 @@
+{% extends 'restaurant/base.html'%}
+{% block content %}
+{% load static %}
+{% load my_tags %}
+
+
+<div class="row text-right">
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/note2-svgrepo-com.svg' %}"
+                            alt="Hungry Shark. Check your table!"
+                            height="100px"
+                            width="100px"/>
+                    <br>
+
+                    <div style="color: blue ">Забронировать столик</div>
+                </h1>
+
+
+                </p>
+                <div class="d-flex align-items-stretch">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="{% static 'image/booking/table1.png' %}" alt="Схема столиков 1" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="{% static 'image/booking/table2.png' %}" alt="Схема столиков 2" class="img-fluid">
+                        </div>
+                    </div>
+
+
+                </div>
+                </br>
+
+
+                <p class="lead">{{booking_create|comment_markdown}}
+                    <br>
+                    Бронирование осуществляется за {{period_of_booking}} дней. <br>
+                    Расписание работы ресторана с {{work_start}} по {{work_end}}. <br><br>
+
+                </p>
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-6">
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/pen-svgrepo-com.svg' %}"
+                            alt="Contact us"
+                            height="100px"
+                            width="100px">
+                    <br>
+
+                    <div style="color: blue ">Бронирование</div>
+                </h1>
+                </p>
+
+                <p class="lead">
+                <form class="row" method="post" enctype="multipart/form-data">
+
+
+                    <div class="card-body">
+
+                        {% csrf_token %}
+                        {{form.as_p}}
+
+
+                        <button type="submit" class="p-2 btn btn-outline-primary">
+                            {% if object %}
+                            Изменить
+                            {% else %}
+                            Создать
+                            {% endif %}
+                        </button>
+
+
+                        {% if user.is_authenticated %}
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_detail' user.pk%}">К истории
+                            бронирований</a>
+                        {% else %}
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">К истории бронирований</a>
+                        {% endif %}
+
+
+                    </div>
+
+
+                </form>
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-6">
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/check-circle-svgrepo-com.svg' %}"
+                            alt="Reflexion"
+                            height="100px"
+                            width="100px">
+                    <br>
+
+                    <div style="color: blue ">Забронировано</div>
+                </h1>
+                </p>
+
+                <p class="lead">
+                    <br>
+                    {% for t in tables_list %}
+
+                    <b>Столик &nbsp; {{t.number}}, &nbsp;мест: &nbsp;{{t.places}}, &nbsp;этаж &nbsp;{{t.flour}}</b>&nbsp;<br>
+
+                    {% for b in booking_list %}
+
+                    {% if b.table == t %}
+                    {{b.date_field}}, &nbsp; {{b.time_start}} - {{b.time_end}}, &nbsp;
+                    {% if b.active %}
+                    <b>Подтверждено</b>
+                    {%else%}
+                    <b>Ожидает подтверждения</b>
+                    {% endif %}
+                    <br>
+
+                    {% endif %}
+
+
+                    {% endfor %}
+                    <br>
+                    {% endfor %}
+
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

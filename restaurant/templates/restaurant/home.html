@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% extends 'restaurant/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="row text-right">
+<div class="col-12">
+
+    <div class="card mb-3 box-shadow">
+
+
+        <div class="card-body">
+
+            <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                        <img
+                src="{% static 'image/shark.svg' %}"
+                alt="Hungry Shark. Feed The Shark inside you!"
+                height="100px"
+                width="100px"/>
+        <br>
+
+                <div style="color: blue ">Hungry Shark</div>
+            </h1></p>
+            <div class="d-flex align-items-stretch">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <img src="{{home_about_inside1.image|media_filter}}" alt="{{home_about_inside1.descrirtion}}" class="img-fluid">
+                    </div>
+                    </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <img src="{{home_about_inside2.image|media_filter}}" alt="{{home_about_inside2.descrirtion}}" class="img-fluid">
+
+                    </div>
+                    </div>
+
+
+                </div>
+
+
+            <p class="lead"> {{home_about|comment_markdown}} </p><br>
+
+            </p>
+        </div>
+    </div>
+</div>
+<div class="col-12">
+
+    <div class="card mb-3 box-shadow">
+
+
+        <div class="card-body">
+
+            <p class="card-text">
+
+            <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                        <img
+                src="{% static 'image/honey-svgrepo-com.svg' %}"
+                alt="Feel our service!"
+                height="100px"
+                width="100px">
+        <br>
+
+                <div style="color: blue ">Предложения</div>
+            </h1></p>
+                            <div class="d-flex align-items-stretch">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="{{home_food1.image|media_filter}}" alt="{{home_food1.descrirtion}}" class="img-fluid">
+                    </div>
+                    </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="{{home_food2.image|media_filter}}" alt="{{home_food2.descrirtion}}" class="img-fluid">
+                    </div>
+                    </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="{{home_food3.image|media_filter}}" alt="{{home_food3.descrirtion}}" class="img-fluid">
+
+                    </div>
+                    </div>
+
+
+                </div>
+
+            <p class="lead"> {{home_offer|comment_markdown}}</p> <br>
+
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-6">
+    <div class="card mb-3 box-shadow">
+
+
+        <div class="card-body">
+
+            <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                        <img
+                src="{% static 'image/at-email-svgrepo-com.svg' %}"
+                alt="Contact us"
+                height="100px"
+                width="100px">
+        <br>
+
+                <div style="color: blue ">Контакты</div>
+            </h1></p>
+
+            <p class="lead">
+                {{home_adress|comment_markdown}}
+
+                <br>
+                <li><a href={{ telegram.link }}>{{telegram.text}}</a></li>
+                <li><a href="{{ whatsup.link }}">{{whatsup.text}}</a></li>
+                <li><a href="{{ vkontakte.link }}">{{vkontakte.text}} </a></li>
+
+            </p> <br>
+
+            </p>
+        </div>
+    </div>
+
+</div>
+    <div class="col-6">
+    <div class="card mb-3 box-shadow">
+
+
+        <div class="card-body">
+
+            <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                        <img
+                src="{% static 'image/cha-bubbles-two-svgrepo-com (2).svg' %}"
+                alt="Reflexion"
+                height="100px"
+                width="100px">
+        <br>
+
+                <div style="color: blue ">Обратная связь</div>
+            </h1></p>
+
+            <p class="lead">
+                <br>
+
+                <li><a href="{% url 'restaurant:question_list' %}"> <b>Задайте нам вопрос</b>  </a></li>
+                {% comment 'Отзывы пока не реализовал' %}
+                <li><b>Оставьте отзыв о посещении ресторана</b> (страница отзывов - необходима регистрация) <br></li>
+                {% endcomment %}
+
+            </p> <br>
+
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

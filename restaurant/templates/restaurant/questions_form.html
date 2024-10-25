@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends 'restaurant/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="row text-right">
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/helpoutline-svgrepo-com.svg' %}"
+                            alt="As is the question, so is the answer."
+                            height="100px"
+                            width="100px"/>
+                    <br>
+
+                    <div style="color: blue ">Задайте вопрос</div>
+                </h1>
+                </p>
+
+
+                <p class="lead">
+
+                    {% if user.is_staff or user.is_superuser %}
+                <div style="color: red"><b>Вы - суперпользователь/контент-менеджер. Вы можете создавать вопросы без
+                    премодерации и сразу писать ответ.</b></div>
+                <br>
+                {% endif %}
+                </p>
+
+                <form class="row" method="post" enctype="multipart/form-data">
+
+
+                    <div class="card-body">
+
+                        {% csrf_token %}
+                        {{form.as_p}}
+
+
+                        <button type="submit" class="p-2 btn btn-outline-primary">
+                            {% if object %}
+                            Изменить
+                            {% else %}
+                            Создать
+                            {% endif %}
+                        </button>
+
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:question_list' %}">Отмена</a>
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'restaurant/base.html'%}
+{% load my_tags %}
+{% block content %}
+<div class="container">
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="col-12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <p>
+                            Срок действия токена истёк. Создайте бронирование снова.
+                            <br>
+                            <a class="p-2 btn btn-outline-primary" href="{% url 'restaurant:booking_create' %}">Бронирование столика</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

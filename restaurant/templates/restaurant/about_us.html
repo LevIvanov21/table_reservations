@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% extends 'restaurant/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="row text-right">
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/des-ink-well-svgrepo-com.svg' %}"
+                            alt="Our history"
+                            height="100px"
+                            width="100px"/>
+                    <br>
+
+                    <div style="color: blue ">История ресторана</div>
+                </h1>
+                </p>
+
+
+                <p class="lead">
+                    {{about_us_history_part1|comment_markdown}}</p>
+
+                <div class="d-flex align-items-stretch">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="{{about_us_inside3.image|media_filter}}" alt="{{about_us_inside3.descrirtion}}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="{{about_us_inside4.image|media_filter}}" alt="{{about_us_inside4.descrirtion}}" class="img-fluid">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                <p class="lead">
+                    {{about_us_history_part2|comment_markdown}}
+
+                </p><br>
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/mountain-top-summit-sunrise-svgrepo-com.svg' %}"
+                            alt="Our mission"
+                            height="100px"
+                            width="100px">
+                    <br>
+
+                    <div style="color: blue ">Миссия и ценности</div>
+                </h1>
+
+
+
+
+                <p class="lead">
+                     {{about_us_mission_part|comment_markdown}}
+                </p>
+            </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/joint-command-team-svgrepo-com.svg' %}"
+                            alt="Our team"
+                            height="100px"
+                            width="100px">
+                    <br>
+
+                    <div style="color: blue ">Наша команда</div>
+                </h1>
+
+
+                <p class="lead">
+                    {{about_us_command_part1|comment_markdown}}</p>
+
+
+                <div class="d-flex align-items-stretch">
+
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <img src="{{about_us_team1.image|media_filter}}" alt="{{about_us_team1.descrirtion}}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="{{about_us_team2.image|media_filter}}" alt="{{about_us_team2.descrirtion}}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <img src="{{about_us_team3.image|media_filter}}" alt="{{about_us_team3.descrirtion}}" class="img-fluid">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <p class="lead"> {{about_us_command_part2|comment_markdown}} </p>
+                <br>
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% extends 'restaurant/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="row text-right">
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                <h1 class="card-title  text-center">
+                    <img
+                            src="{% static 'image/helpoutline-svgrepo-com.svg' %}"
+                            alt="Your request is very important to us..."
+                            height="100px"
+                            width="100px"/>
+                    <br>
+
+                    <div style="color: blue ">Вопросы и ответы</div>
+                </h1>
+                </p>
+
+
+                <p class="lead">
+                    {{questions_and_answers|comment_markdown}}
+
+
+                    {% if user.is_staff or user.is_superuser %}
+                <div style="color: red"><b>Вы - суперпользователь/контент-менеджер. Вы можете изменять и удалять вопросы,
+                    устанавливать флаг премодерации для их отображения на сайте.</b></div>
+                <br>
+                {% endif %}
+
+
+
+                    <br><br>
+
+                {% if user.is_staff or user.is_superuser %}
+
+                {% for object in object_list %}
+
+                <div class="card mb-3 box-shadow">
+
+                    <div class="card-header">
+                        {{object.sign}}
+                    </div>
+                    <div class="card-body">
+
+                        <p class="card-text">
+                        <p class="lead">
+                        <div style="color: blue ">Вопрос:</div>
+                        {{object.question_text}}<br><br>
+
+                        {% if object.answer_text %}
+                        <div style="color: blue ">Ответ:</div>
+                        {{object.answer_text}}<br><br>
+                        {% endif %}
+
+                        <small class="text-body-secondary">
+
+                        <div style="color: blue ">Статус:
+                            <b>
+                        {% if object.moderated %}
+                        опубликован,
+                        {% else %}
+                        ожидает проверки,
+                        {% endif %}
+                                </b>
+                          &nbsp;   создан
+
+
+                        {{object.created_at|time_to_local:time_offset}}
+                        </p></p>
+                        <br>
+                            </div>
+                        </small>
+
+                        <a class="p-2 btn btn-outline-primary" href="{%url 'restaurant:question_update' object.pk%}" role="button">Изменить</a>
+                        <a class="p-2 btn btn-outline-primary" href="{%url 'restaurant:question_delete' object.pk%}" role="button">Удалить</a>
+
+
+
+                    </div>
+
+                </div>
+
+
+                {% endfor %}
+                {% else %}
+
+                {% for object in object_list %}
+                {% if object.moderated %}
+
+                <div class="card mb-3 box-shadow">
+
+                    <div class="card-header">
+                        {{object.sign}}
+                    </div>
+                    <div class="card-body">
+
+                        <p class="card-text">
+                        <p class="lead">
+                        <div style="color: blue ">Вопрос:</div>
+                        {{object.question_text}}
+
+                        {% if object.answer_text %}
+                        <div style="color: blue ">Ответ:</div>
+                        {{object.answer_text}}<br><br>
+                        {% endif %}
+
+
+                         <div style="color: blue ">Дата создания:</div>
+                        {{object.created_at|time_to_local:time_offset}}
+                        </p></p>
+
+                    </div>
+
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+                <a class="p-2 btn btn-outline-primary" href="{%url 'restaurant:question_create' %}">Задать вопрос</a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

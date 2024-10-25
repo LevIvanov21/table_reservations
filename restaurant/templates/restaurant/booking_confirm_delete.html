@@ -1,0 +1,39 @@
+{% extends 'restaurant/base.html'%}
+{% block content %}
+
+
+<div class="row text-start">
+
+    <div class="col-lg-12 col-md-6 col-sm-12">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Удаление бронирования</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="card-text">Вы действительно хотите удалить бронирование (имя: {{object.user}},
+                    {{object.table}}, на {{object.date_field}}, время: {{object.time_start}} - {{object.time_end}}?</div>
+                <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                    <div class="mb-3">
+
+                    {% csrf_token %}
+
+
+                    </div>
+
+
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                        Удалить
+                    </button>
+
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'restaurant:booking_list' %}">Отмена</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
